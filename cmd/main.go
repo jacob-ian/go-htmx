@@ -35,7 +35,7 @@ func main() {
 
 	router := httprouter.New()
 	router.HandlerFunc("GET", "/", logRequest(NewHomeHandler(&items)))
-	router.HandlerFunc("GET", "/about", logRequest(newAboutHandler()))
+	router.HandlerFunc("GET", "/about", logRequest(NewAboutHandler()))
 	router.HandlerFunc("POST", "/items", logRequest(NewAddItemHandler(&items)))
 	router.HandlerFunc("DELETE", "/items/:id", logRequest(NewDeleteItemHandler(&items)))
 	router.HandlerFunc("GET", "/assets/:path", logRequest(htmx.NewStaticFileServer()))
@@ -67,7 +67,7 @@ func NewHomeHandler(items *[]item) http.Handler {
 	})
 }
 
-func newAboutHandler() http.Handler {
+func NewAboutHandler() http.Handler {
 	type post struct {
 		Title       string
 		Description string
