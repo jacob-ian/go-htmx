@@ -1,0 +1,17 @@
+{{ template "index.html" . }}
+
+{{ define "title"}}{{.Title}}{{end}}
+
+{{ define "body" }}
+<h1 class="text-3xl mb-10 font-bold text-center">Welcome</h1>
+<p>Hello there, {{ .Name }}!</p>
+<form hx-post="/items" hx-target="#list" hx-swap="beforeend">
+  <input name="text" type="text" class="p-2 rounded-md" required />
+  <button class="bg-slate-600 p-2 rounded-md text-white" type="submit">Add to List</button>
+</form>
+<div id="list" class="flex flex-col bg-slate-600 p-5 rounded-md gap-y-2">
+  {{ range .Items }}
+    {{ template "list-item.html" . }}
+  {{end}}
+</div>
+{{ end }}
