@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/julienschmidt/httprouter"
+	"jacobmatthe.ws/htmx"
 	"jacobmatthe.ws/htmx/internal/template"
 )
 
@@ -37,6 +38,7 @@ func main() {
 	router.HandlerFunc("GET", "/about", logRequest(newAboutHandler()))
 	router.HandlerFunc("POST", "/items", logRequest(NewAddItemHandler(&items)))
 	router.HandlerFunc("DELETE", "/items/:id", logRequest(NewDeleteItemHandler(&items)))
+	router.HandlerFunc("GET", "/assets/:path", logRequest(htmx.NewStaticFileServer()))
 
 	log.Println("Listening on localhost:4000")
 	log.Fatal(http.ListenAndServe(":4000", router))
