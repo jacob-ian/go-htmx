@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-//go:embed assets
+//go:embed assets/*
 var staticFs embed.FS
 
 func NewStaticFileServer() http.Handler {
